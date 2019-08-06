@@ -9,7 +9,6 @@ You can remove this script and any reference to it.
  function showAddList(){
     console.log("showListSub");
     whichList("add");
-    
  }
 
  //This button will show or unshow the subtraction list when the user clicks on the button.
@@ -32,13 +31,15 @@ You can remove this script and any reference to it.
         showList(testType)
     }
  }
-
+ document.getElementById("additionList").style.display = "none";
+ document.getElementById("subtractionList").style.display = "none";
  function showList(type){
     console.log("type: "+type);
     let listShowing = document.getElementById(type).style.display;
     console.log("listShowing: "+listShowing);
     if(listShowing == "none"){
         document.getElementById(type).style.display="block";
+        
     }
     else if(listShowing == "block"){
         document.getElementById(type).style.display="none";
