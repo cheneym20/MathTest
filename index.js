@@ -114,13 +114,13 @@ function trackTestResults(){
     document.getElementById("additionList").style.display = "none";
     document.getElementById("subtractionList").style.display = "none";
 
-    let arrColors = ["#ffffff","#4cf03a","#e8e53a","#e8a83a","#e83a3a","#8a2424"];
+    let arrColors = ["#ffffff","#4cf03a","#e8e53a","#e8a83a","#e83a3a","#c953ed"];
 
     for(i=1; i<=5; i++){
         document.getElementById("addTest"+[i]).style.backgroundColor = "none";
         document.getElementById("subTest"+[i]).style.backgroundColor = "none";
         document.getElementById("addTest"+[i]).style.backgroundColor = arrColors[i];
-        document.getElementById("addTest"+[i]).style.backgroundColor = arrColors[i];
+        document.getElementById("subTest"+[i]).style.backgroundColor = arrColors[i];
     }
  }
 
@@ -148,7 +148,7 @@ function randomMathQuestionGenerator(level, operator){
     let opr = " + ";
     if(operator == "sub") opr = " - "; 
     return number1+":"+number2;
-    
+
 }
 
 function randomMathQuestionGeneratorAnswer(){
