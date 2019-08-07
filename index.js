@@ -148,6 +148,7 @@ function randomMathQuestionGenerator(level, operator){
     let opr = " + ";
     if(operator == "sub") opr = " - "; 
     return number1+":"+number2;
+    
 }
 
 function randomMathQuestionGeneratorAnswer(){
