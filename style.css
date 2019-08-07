@@ -85,6 +85,14 @@
 		nav ul a {
 			color: darkgreen;
 			text-decoration: none;
+			padding:5px;
+			border:1px rgba(107, 61, 7, 0.979) solid;
+			border-radius: 10px;
+			cursor: pointer;
+		}
+
+		li {
+			margin:8px;
 		}
 
 		#header, #footer {
@@ -111,12 +119,15 @@
 		
 		.operatorButton{
 			padding:5px;
-			border:1px black solid;
+			border:3px #574d80 solid;
 			margin:2px;
+			text-align: center;
+			border-radius: 10px;
+			cursor: pointer;
 		}
 		
 		.main_body{
-			border:1px black solid;
+			border:3px #574d80 solid;
 			padding:15px;
 			margin:5px;
 			display:none;
@@ -132,9 +143,11 @@
 		}
 
 		.addition_list{
-			display:block;
+			display:none;
+			margin-left: 5px;
 		}
 
 		.subtraction_list{
-			display:block;
+			display:none;
+			margin-left: 5px;
 		}

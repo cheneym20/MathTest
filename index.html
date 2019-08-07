@@ -17,10 +17,10 @@
 			<article>
 				<h1 id="TestLevelHeader">Test Your Math Skills</h1>
 				<div class="main_body" id="testLevelMain">
-					<span class="math_question" id="testQuestion">5 + 5 = </span>
+					<!-- <span class="math_question" id="testQuestion">5 + 5 = </span>
 					<input id="answerInput" />
-					<button class="done_button" onclick="submitAnswer()">Done</button>
-					<p id="errorMessage"></p>
+					<button id="answer" class="done_button" onclick="submitAnswer()">Done</button>
+					<p id="errorMessage"></p> -->
 				</div>
 			</article>								
 		</main>
@@ -28,19 +28,19 @@
 		<nav id="left" class="column">
 			<h3 class="operatorButton" id="addBtn" onclick="showAddList()">Addition</h3>
 			<ul class="addition_list" id="additionList">
-				<li><a id="addTest1" onclick="addTest(1)">Numbers 1-10</a></li>
-				<li><a id="addTest2" onclick="addTest(2)">Numbers 1-20</a></li>
-				<li><a id="addTest3" onclick="addTest(3)">Numbers 1-30</a></li>
-				<li><a id="addTest4" onclick="addTest(4)">Numbers 1-40</a></li>
-				<li><a id="addTest5" onclick="addTest(4)">Numbers 1-50</a></li>
+				<li><a id="addTest1" onclick="addTest(1,1)">Numbers 1-10</a></li>
+				<li><a id="addTest2" onclick="addTest(2,1)">Numbers 1-20</a></li>
+				<li><a id="addTest3" onclick="addTest(3,1)">Numbers 1-30</a></li>
+				<li><a id="addTest4" onclick="addTest(4,1)">Numbers 1-40</a></li>
+				<li><a id="addTest5" onclick="addTest(4,1)">Numbers 1-50</a></li>
 			</ul>
 			<h3 class="operatorButton" id="subBtn" onclick="showSubList()">Subtraction</h3>
 			<ul class="subtraction_list" id="subtractionList">
-				<li><a id="subTest1" onclick="subTest(1)">Numbers 1-10</a></li>
-				<li><a id="subTest2" onclick="subTest(2)">Numbers 1-20</a></li>
-				<li><a id="subTest3" onclick="subTest(3)">Numbers 1-30</a></li>
-				<li><a id="subTest4" onclick="subTest(4)">Numbers 1-40</a></li>
-				<li><a id="subTest5" onclick="subTest(5)">Numbers 1-50</a></li>
+				<li><a id="subTest1" onclick="subTest(1,-1)">Numbers 1-10</a></li>
+				<li><a id="subTest2" onclick="subTest(2,-1)">Numbers 1-20</a></li>
+				<li><a id="subTest3" onclick="subTest(3,-1)">Numbers 1-30</a></li>
+				<li><a id="subTest4" onclick="subTest(4,-1)">Numbers 1-40</a></li>
+				<li><a id="subTest5" onclick="subTest(5,-1)">Numbers 1-50</a></li>
 			</ul>
 		</nav>
 
