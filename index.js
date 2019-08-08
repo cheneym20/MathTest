@@ -40,22 +40,31 @@ You can remove this script and any reference to it.
     }
  }
 
+function keepTrackList(addRemove, testNbr){
+    if(testNbr == -1) return;
+    arr = [];
+}
+
  //This function will activate the test on the main screen with the proper test level.
  function addTest(level,opr){
-     document.getElementById("testLevelMain").style.display="block";
+     let testNbr = keepTrackList("add", -1);
+     document.getElementById("testLevelMain"+testNbr).style.display="block";
+     document.getElementById("testLevelMain"+testNbr).style.height="60px";
 
     let answer = addProblem(level,opr);
     addInput();
-    addDoneBtn();
+    addDoneBtn(answer);
     addErrorMessage();
  }
 
  function subTest(level,opr){
     document.getElementById("testLevelMain").style.display="block";
+    document.getElementById("testLevelMain").style.height="100px";
 
     let answer = addProblem(level,opr);
+    //document.getElementById("math_question").style.display="inline-block";
     addInput();
-    addDoneBtn();
+    addDoneBtn(answer);
     addErrorMessage();
  }
 
@@ -73,6 +82,7 @@ function addProblem(level,opr){
     tag.setAttribute("class","math_question");
     let mainDivProb = document.getElementById("testLevelMain");
     mainDivProb.appendChild(tag);
+    
     return answer;
 }
 
@@ -83,7 +93,7 @@ function addInput(){
     mainDivAnsInput.appendChild(ansInput);
 }
 
-function addDoneBtn(){
+function addDoneBtn(answer){
     let btnDone = document.createElement("button");
     let btnTxt = document.createTextNode("Done");
     btnDone.appendChild(btnTxt);
@@ -91,7 +101,8 @@ function addDoneBtn(){
     btnDone.setAttribute("id","answer");
     let mainDivBtnDone = document.getElementById("testLevelMain");
     mainDivBtnDone.appendChild(btnDone);
-    document.getElementById("answer").addEventListener("click",submitAnswer());
+    let userInput = -1;
+    document.getElementById("answer").addEventListener("click",submitAnswer(answer, userInput));
 }
 
 function addErrorMessage(){
@@ -101,14 +112,27 @@ function addErrorMessage(){
     mainDivErrorPara.appendChild(errorPara);
 }
 
-function submitAnswer(){
+function submitAnswer(answer, userInput){
+    if(userInput != -1) userInput = parseInt(document.getElementById("answerInput").nodeValue);
+    if(answer == null || answer == "" || answer == "undefined"){
+        break;
+    }
+    if(isNaN(userInput)){
+        alert("Add a Number");
+    } else
+    if(answer == userInput){
+        hideBoxWithCorrect();
+        keepTrackList("add");
+    }
 
-}
-
-function trackTestResults(){
-
+    //let userInput = document.getElementById("answerInput").nodeValue;
 }
  
+function hideBoxWithCorrect(){
+    let problemBoxHeight = document.getElementById("testLevelMain").style.height = "0px";
+
+}
+
 //This function will load all the proper information on the page when page loads.
  function onload(){
     document.getElementById("additionList").style.display = "none";
