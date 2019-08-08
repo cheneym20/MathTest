@@ -47,9 +47,9 @@ function keepTrackList(addRemove, testNbr){
 
  //This function will activate the test on the main screen with the proper test level.
  function addTest(level,opr){
-     let testNbr = keepTrackList("add", -1);
-     document.getElementById("testLevelMain"+testNbr).style.display="block";
-     document.getElementById("testLevelMain"+testNbr).style.height="60px";
+     //let testNbr = keepTrackList("add", -1);
+     document.getElementById("testLevelMain").style.display="block";
+     //document.getElementById("testLevelMain"+testNbr).style.height="60px";
 
     let answer = addProblem(level,opr);
     addInput();
@@ -59,7 +59,7 @@ function keepTrackList(addRemove, testNbr){
 
  function subTest(level,opr){
     document.getElementById("testLevelMain").style.display="block";
-    document.getElementById("testLevelMain").style.height="100px";
+    //document.getElementById("testLevelMain").style.height="100px";
 
     let answer = addProblem(level,opr);
     //document.getElementById("math_question").style.display="inline-block";
