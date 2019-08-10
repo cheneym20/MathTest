@@ -69,8 +69,10 @@ function keepTrackList(addRemove, testNbr){
 
     let answer = addProblem(level,opr,testNbr);
     addInput(testNbr);
-    addDoneBtn(answer,testNbr);
+    addDoneBtn(testNbr);
     addErrorMessage(testNbr);
+    addOnClickEventListener(testNbr);
+    addAnswerClass(testNbr,answer);
  }
 
  function subTest(level,opr){
@@ -82,8 +84,10 @@ function keepTrackList(addRemove, testNbr){
 
     let answer = addProblem(level,opr,testNbr);
     addInput(testNbr);
-    addDoneBtn(answer,testNbr);
+    addDoneBtn(testNbr);
     addErrorMessage(testNbr);
+    addOnClickEventListener(testNbr);
+    addAnswerClass(testNbr,answer);
  }
 
  function addMainDiv(testNbr){
@@ -111,8 +115,7 @@ function addProblem(level,opr,testNbr){
     tag.setAttribute("class","math_question");
     tag.style.display="inline-block";
     let mainDivProb = document.getElementById("testLevelMain"+testNbr);
-    mainDivProb.appendChild(tag);
-    
+    mainDivProb.appendChild(tag);    
     return answer;
 }
 
@@ -123,14 +126,14 @@ function addInput(testNbr){
     mainDivAnsInput.appendChild(ansInput);
 }
 
-function addDoneBtn(answer,testNbr){
+function addDoneBtn(testNbr){
     let btnDone = document.createElement("button");
     let btnTxt = document.createTextNode("Done");
     btnDone.appendChild(btnTxt);
     btnDone.setAttribute("type","button");
     btnDone.setAttribute("class","done_button");
     btnDone.setAttribute("id","answer"+testNbr);
-    btnDone.addEventListener("click",submitAnswer);
+    //btnDone.addEventListener("click",submitAnswer);
 
     let mainDivBtnDone = document.getElementById("testLevelMain"+testNbr);
     mainDivBtnDone.appendChild(btnDone);
@@ -143,25 +146,63 @@ function addErrorMessage(testNbr){
     mainDivErrorPara.appendChild(errorPara);
 }
 
-function submitAnswer(answer, userInput){
-    if(userInput != -1) userInput = parseInt(document.getElementById("answerInput").nodeValue);
+function addOnClickEventListener(testNbr){
+    document.getElementById("article").addEventListener("click", function(e){
+        if(e.target && e.target.id == 'answer'+testNbr){
+            let answerString = e.target.className; //Get the answer from the answer# class.
+            console.log("class: "+answerString);
+            let answerNumber = answerString.substring(18,20);
+            console.log("answer: "+answerNumber);
+            let userInput = e.target.value; //get the userinput value.
+            console.log("value: "+userInput);
+            submitAnswer(answerNumber,testNbr);
+        }
+    })
+}
+
+function addAnswerClass(testNbr,answer){
+    let buttonTag = document.getElementById("answer"+testNbr);
+    buttonTag.setAttribute("class","done_button answer"+answer);
+}
+
+function submitAnswer(answer, testNbr){
+    //if(userInput != -1) userInput = parseInt(document.getElementById("answerInput").nodeValue);
+    let userInput = parseInt(document.getElementById("answerInput"+testNbr).value);
     if(answer == null || answer == "" || answer == "undefined"){
-        break;
+        alert("Use a Number");
     }
     if(isNaN(userInput)){
         alert("Add a Number");
     } else
-    if(answer == userInput){
-        hideBoxWithCorrect();
-        keepTrackList("addNumber");
-    }
-
-    //let userInput = document.getElementById("answerInput").nodeValue;
+        hideBoxWithCorrect(testNbr);
+        keepTrackList("subtractNumber",testNbr);
+        let result = "";
+        if(answer == userInput) result = "Correct!";
+        if(answer != userInput) result = "Incorrect!";
+        console.log("Result: "+ result);
+        resultFunc(result,testNbr);
+    
 }
  
-function hideBoxWithCorrect(){
-    document.getElementById("testLevelMain").style.height = "0px";
+function hideBoxWithCorrect(testNbr){
+    let box = document.getElementById("testLevelMain"+testNbr);
+    box.style.height = "0px";
+    let children = box.children;
+    for(i=0; i<children.length; i++){
+        children[i].style.display = "none";
+    }
 }
+
+function resultFunc(result,testNbr){
+    let box = document.getElementById("testLevelMain"+testNbr);
+    let newDiv = document.createElement("div");
+    let newContent = document.createTextNode(result);
+    newDiv.setAttribute("class","question_result");
+    newDiv.appendChild(newContent);
+    box.appendChild(newDiv);
+}
+
+
 
 //This function will load all the proper information on the page when page loads.
  function onload(){

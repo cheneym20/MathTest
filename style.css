@@ -160,3 +160,9 @@
 			display:none;
 			margin-left: 5px;
 		}
+		.question_result{
+			font-weight: bold;
+			font-size: 50px;
+			transition-delay: 0.4s;
+			display:block;
+		}
