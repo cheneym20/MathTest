@@ -102,13 +102,16 @@ function keepTrackList(addRemove, testNbr){
  }
 
 function addProblem(level,opr,testNbr){
-    let operator = opr;
-    if(opr > 0) operator = "add";
-    if(opr < 0) operator = "sub";
+    let operator = "";
+    let operatorLiteral = "";
+    let answer = 0;
+    if(opr > 0) operator = "add", operatorLiteral = " + ";
+    if(opr < 0) operator = "sub", operatorLiteral = " - ";
     let twoNumbers = randomMathQuestionGenerator(level, operator);
     let arr = twoNumbers.split(":");
-    let problem = document.createTextNode(arr[0]+" + "+arr[1]+" = ");
-    let answer = parseInt(arr[0]) + parseInt(arr[1]);
+    let problem = document.createTextNode(arr[0]+operatorLiteral+arr[1]+" = ");
+    if(opr > 0) answer = parseInt(arr[0]) + parseInt(arr[1]);
+    if(opr < 0) answer = parseInt(arr[0]) - parseInt(arr[1]);
     let tag = document.createElement("span");
     tag.appendChild(problem);
     tag.setAttribute("id","testQuestion"+testNbr);
@@ -166,7 +169,6 @@ function addAnswerClass(testNbr,answer){
 }
 
 function submitAnswer(answer, testNbr){
-    //if(userInput != -1) userInput = parseInt(document.getElementById("answerInput").nodeValue);
     let userInput = parseInt(document.getElementById("answerInput"+testNbr).value);
     if(answer == null || answer == "" || answer == "undefined"){
         alert("Use a Number");
@@ -181,12 +183,11 @@ function submitAnswer(answer, testNbr){
         if(answer != userInput) result = "Incorrect!";
         console.log("Result: "+ result);
         resultFunc(result,testNbr);
-    
 }
  
 function hideBoxWithCorrect(testNbr){
     let box = document.getElementById("testLevelMain"+testNbr);
-    box.style.height = "0px";
+    box.style.height = "23px";
     let children = box.children;
     for(i=0; i<children.length; i++){
         children[i].style.display = "none";
@@ -221,28 +222,33 @@ function resultFunc(result,testNbr){
 
 //This function returns both the Math question String and the answer.
 function randomMathQuestionGenerator(level, operator){
-    let number1 = Math.floor(Math.random() * (level * 10));
+    let number1;
     let number2;
     if(operator == "add"){
+        number1 = Math.floor(Math.random() * (level * 10));
         number2 = Math.floor(Math.random() * (level * 10));
     }
     else if(operator == "sub"){
         number2 = Math.floor(Math.random() * (level * 10));
-        for(i=number2; i<number1; i--){
-            if(i >= number1){
-                number2 = i;
-            }
-            else{
-                i--;
-            }
-        }
+        number1 = Math.floor(Math.random() * ((level * 10) - number2) + number2);
     }
 
-    let opr = " + ";
-    if(operator == "sub") opr = " - "; 
     return number1+":"+number2;
-
 }
 
 let problemList = [];
 onload();
+
+
+// function truncateString(str, num) {
+//     return str.slice(num); 
+//     //1.Take the incoming string "str". 
+//     //2. Use the splice method use only return a certain part of the string.
+//     //3. Use the incoming "num" to signify where in the splice to start splicing.  0 starts from the beginning.
+//     //For example, "The dog ran".  If you splice the string with number 7, then it returns only "The dog"
+//     //4.Have the function return the value by adding "return" to the line before.  Like "return..."(value)
+//   }
+  
+//   truncateString("A-tisket a-tasket A green and yellow basket", 8);
+
+//Slice is the same as subString!!!!!!!!!!!!!!!!!!!!!!!!!!!
