@@ -150,17 +150,37 @@ function addErrorMessage(testNbr){
 }
 
 function addOnClickEventListener(testNbr){
-    document.getElementById("article").addEventListener("click", function(e){
-        if(e.target && e.target.id == 'answer'+testNbr){
+    let buttonInput = document.getElementById("article");
+    buttonInput.addEventListener("click", function(e){
+        console.log("keycode: "+e.keyCode);
+        if(e.keyCode != 13 && e.target && e.target.id == 'answer'+testNbr){
             let answerString = e.target.className; //Get the answer from the answer# class.
-            console.log("class: "+answerString);
             let answerNumber = answerString.substring(18,20);
-            console.log("answer: "+answerNumber);
-            let userInput = e.target.value; //get the userinput value.
-            console.log("value: "+userInput);
+            let buttonUserInput = e.target.value; //get the userinput value.
             submitAnswer(answerNumber,testNbr);
         }
     })
+
+    buttonInput.addEventListener("keyup", function(e) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (e.keyCode === 13 && e.target && e.target.id == 'answerInput'+testNbr) {
+          e.preventDefault();
+          let answerString = e.target.nextSibling.className; //Get the answer from the answer# class.
+          let answerNumber = answerString.substring(18,20);
+          if(validateName(answerNumber) == 1){
+            submitAnswer(answerNumber,testNbr);
+          }
+        }
+    })
+}
+
+function validateName (name){
+    if(name != ""){
+        return 1;
+    }
+    else{
+        return 2;
+    }
 }
 
 function addAnswerClass(testNbr,answer){
@@ -169,6 +189,7 @@ function addAnswerClass(testNbr,answer){
 }
 
 function submitAnswer(answer, testNbr){
+    
     let userInput = parseInt(document.getElementById("answerInput"+testNbr).value);
     if(answer == null || answer == "" || answer == "undefined"){
         alert("Use a Number");
