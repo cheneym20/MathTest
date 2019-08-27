@@ -166,3 +166,11 @@
 			transition-delay: 0.4s;
 			display:block;
 		}
+
+		.inbl{
+			display:inline-block;
+		}
+
+		.clear_button{
+			margin-left:20px;
+		}

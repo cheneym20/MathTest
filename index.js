@@ -1,10 +1,3 @@
-//Javascript First Trial//
-
-/* =============================
-This script generates sample text for the body content. 
-You can remove this script and any reference to it. 
- ============================= */
-
  //This button will show or unshow the addition list when the user clicks on the button.
  function showAddList(){
     whichList("add");
@@ -191,12 +184,12 @@ function addAnswerClass(testNbr,answer){
 function submitAnswer(answer, testNbr){
     
     let userInput = parseInt(document.getElementById("answerInput"+testNbr).value);
-    if(answer == null || answer == "" || answer == "undefined"){
-        alert("Use a Number");
+    if(userInput == null || userInput == "" || userInput == "undefined"){
+        
     }
     if(isNaN(userInput)){
-        alert("Add a Number");
-    } else
+        
+    } else {
         hideBoxWithCorrect(testNbr);
         keepTrackList("subtractNumber",testNbr);
         let result = "";
@@ -204,6 +197,7 @@ function submitAnswer(answer, testNbr){
         if(answer != userInput) result = "Incorrect!";
         console.log("Result: "+ result);
         resultFunc(result,testNbr);
+    }
 }
  
 function hideBoxWithCorrect(testNbr){
@@ -255,6 +249,20 @@ function randomMathQuestionGenerator(level, operator){
     }
 
     return number1+":"+number2;
+}
+
+function clearButton(){
+        //Delete the div with the same number on the testLevelMain.
+        let topDiv = document.getElementById("article");
+        while(topDiv.firstChild){
+            topDiv.removeChild(topDiv.firstChild);
+        }
+
+        let newDiv = document.createElement("div");
+        newDiv.setAttribute("class","main_body");
+        newDiv.setAttribute("id","testLevelMain");
+        topDiv.appendChild(newDiv);
+
 }
 
 let problemList = [];
